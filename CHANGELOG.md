@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.0.3](https://github.com/eggjs/watcher/compare/v4.0.2...v4.0.3) (2025-01-04)
+
+
+### Bug Fixes
+
+* export watcher type on eggjs/core namespace ([#17](https://github.com/eggjs/watcher/issues/17)) ([12e7fbd](https://github.com/eggjs/watcher/commit/12e7fbdcd9381c662b8cd3a22e1e2dcafa15040f))
+
 ## [4.0.2](https://github.com/eggjs/watcher/compare/v4.0.1...v4.0.2) (2024-12-20)
 
 
