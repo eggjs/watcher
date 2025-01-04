@@ -2,19 +2,20 @@ import { debuglog } from 'node:util';
 import { Base } from 'sdk-base';
 import camelcase from 'camelcase';
 import { importModule } from '@eggjs/utils';
+import type { EggAppConfig } from '@eggjs/core';
 import { BaseEventSource } from './event-sources/base.js';
 import { isEqualOrParentPath } from './utils.js';
-import type { ChangeInfo, WatcherConfig } from './types.js';
+import type { ChangeInfo } from './types.js';
 
 const debug = debuglog('@eggjs/watcher/lib/watcher');
 
 export type WatchListener = (info: ChangeInfo) => void;
 
 export class Watcher extends Base {
-  #config: WatcherConfig;
+  #config: EggAppConfig;
   #eventSource: BaseEventSource;
 
-  constructor(config: WatcherConfig) {
+  constructor(config: EggAppConfig) {
     super({
       initMethod: '_init',
     });
@@ -23,7 +24,7 @@ export class Watcher extends Base {
 
   protected async _init() {
     const watcherType = this.#config.watcher.type;
-    let EventSource: typeof BaseEventSource = this.#config.watcher.eventSources[watcherType] as any;
+    let EventSource = this.#config.watcher.eventSources[watcherType] as unknown as typeof BaseEventSource;
     if (typeof EventSource === 'string') {
       EventSource = await importModule(EventSource, {
         importDefaultOnly: true,

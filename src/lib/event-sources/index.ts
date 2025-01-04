@@ -1,3 +1,9 @@
-export * from './base.js';
-export * from './default.js';
-export * from './development.js';
+import { BaseEventSource } from './base.js';
+import DefaultEventSource from './default.js';
+import DevelopmentEventSource from './development.js';
+
+export {
+  BaseEventSource,
+  DefaultEventSource,
+  DevelopmentEventSource,
+};

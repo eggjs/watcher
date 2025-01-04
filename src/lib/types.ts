@@ -1,16 +1,20 @@
 import type { WatchEventType, Stats } from 'node:fs';
-import type { EggApplicationCore, EggAppConfig } from 'egg';
 import type { Watcher } from './watcher.js';
 
 export interface WatcherConfig {
-  watcher: {
-    type: string;
-    eventSources: Record<string, string>;
-  };
-  [key: string]: Record<string, any>;
+  /**
+   * event source type, default is `default`
+   * can be `default` or `development`
+   */
+  type: string;
+  /**
+   * event sources
+   * key is event source type, value is event source module path
+   */
+  eventSources: Record<string, string>;
 }
 
-export interface ChangeInfo {
+export interface ChangeInfo extends Record<string, any> {
   event: WatchEventType;
   /**
    * file stat if path exists
@@ -19,8 +23,12 @@ export interface ChangeInfo {
   path: string;
 }
 
-export interface EggWatcherApplicationCore extends EggApplicationCore {
-  watcher: Watcher;
-}
+declare module '@eggjs/core' {
+  interface EggCore {
+    watcher: Watcher;
+  }
 
-export type EggWatcherAppConfig = EggAppConfig & WatcherConfig;
+  interface EggAppConfig {
+    watcher: WatcherConfig;
+  }
+}

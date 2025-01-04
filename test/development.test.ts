@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import { strict as assert } from 'node:assert';
 import { scheduler } from 'node:timers/promises';
-import { mm, MockApplication } from 'egg-mock';
+import { mm, MockApplication } from '@eggjs/mock';
 import { getFilePath } from './utils.js';
 
 const file_path1 = getFilePath('apps/watcher-development-app/tmp.txt');

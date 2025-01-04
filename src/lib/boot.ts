@@ -1,12 +1,11 @@
-import type { ILifecycleBoot } from 'egg';
-import { EggWatcherApplicationCore } from './types.js';
+import type { ILifecycleBoot, EggApplicationCore } from 'egg';
 import { Watcher } from './watcher.js';
 
 export class Boot implements ILifecycleBoot {
-  #app: EggWatcherApplicationCore;
+  #app: EggApplicationCore;
   #watcher: Watcher;
 
-  constructor(appOrAgent: EggWatcherApplicationCore) {
+  constructor(appOrAgent: EggApplicationCore) {
     this.#app = appOrAgent;
     this.#watcher = this.#app.watcher = this.#app.cluster(Watcher, {})
       .delegate('watch', 'subscribe')

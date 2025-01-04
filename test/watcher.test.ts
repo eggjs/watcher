@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import { strict as assert } from 'node:assert';
-import { mm, MockApplication } from 'egg-mock';
+import { mm, MockApplication } from '@eggjs/mock';
 import { getFilePath } from './utils.js';
 import { ChangeInfo } from '../src/index.js';
 
@@ -27,7 +27,7 @@ describe('test/watcher.test.ts', () => {
     await app.ready();
 
     const p1 = new Promise<void>(resolve => {
-      app.watcher.watch('xxxx', (info: ChangeInfo & { foo: string }) => {
+      app.watcher.watch('xxxx', (info: ChangeInfo) => {
         assert.equal(info.path, 'xxxx');
         // ensure use config.custom
         assert.equal(info.foo, 'bar');
@@ -58,7 +58,7 @@ describe('test/watcher.test.ts', () => {
     await app.ready();
 
     await new Promise<void>(resolve => {
-      app.watcher.watch([ '/home/admin/xxx' ], (info: ChangeInfo & { foo: string }) => {
+      app.watcher.watch([ '/home/admin/xxx' ], (info: ChangeInfo) => {
         assert.equal(info.path, '/home/admin');
 
         // ensure use config.custom
