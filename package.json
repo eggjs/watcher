@@ -9,16 +9,19 @@
     "name": "watcher",
     "exports": {
       "import": "./dist/esm",
-      "require": "./dist/commonjs"
+      "require": "./dist/commonjs",
+      "typescript": "./src"
     }
   },
   "scripts": {
     "lint": "eslint --cache src test --ext .ts",
-    "pretest": "npm run lint -- --fix && npm run prepublishOnly",
+    "pretest": "npm run clean && npm run lint -- --fix",
     "test": "egg-bin test",
-    "preci": "npm run lint && npm run prepublishOnly && attw --pack",
+    "preci": "npm run clean && npm run lint",
     "ci": "egg-bin cov",
-    "prepublishOnly": "tshy && tshy-after"
+    "postci": "npm run prepublishOnly && attw --pack && npm run clean",
+    "prepublishOnly": "tshy && tshy-after",
+    "clean": "rimraf dist"
   },
   "homepage": "https://github.com/eggjs/watcher",
   "repository": {
@@ -35,7 +38,8 @@
     "node": ">= 18.19.0"
   },
   "dependencies": {
-    "@eggjs/utils": "^4.0.3",
+    "@eggjs/core": "^6.2.13",
+    "@eggjs/utils": "^4.2.3",
     "camelcase": "^5.0.0",
     "sdk-base": "^5.0.0"
   },
@@ -45,8 +49,9 @@
     "@types/node": "22",
     "@types/mocha": "10",
     "egg": "beta",
-    "egg-bin": "beta",
-    "egg-mock": "beta",
+    "@eggjs/bin": "7",
+    "@eggjs/mock": "6",
+    "rimraf": "6",
     "eslint": "8",
     "eslint-config-egg": "14",
     "tshy": "3",
