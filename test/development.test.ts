@@ -63,7 +63,8 @@ describe('test/development.test.ts', () => {
       .get('/app-hasDir')
       .expect(200)
       .expect({
-        hasDir: false,
+        // work on windows
+        hasDir: process.platform === 'win32',
       });
 
     /*
