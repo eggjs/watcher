@@ -89,10 +89,12 @@ export default class DevelopmentEventSource extends BaseEventSource {
     //    mtime: Wed Jun 17 2015 00:08:38 GMT+0800 (CST),
     //    ctime: Wed Jun 17 2015 00:08:38 GMT+0800 (CST),
     //    birthtime: Tue Jun 16 2015 23:19:13 GMT+0800 (CST) } }
+    const stat = fs.statSync(file, { throwIfNoEntry: false });
     const info = {
       path: file,
       event,
-      stat: fs.statSync(file, { throwIfNoEntry: false }),
+      stat,
+      isDirectory: stat?.isDirectory(),
     } as ChangeInfo;
     this.emit('change', info);
   }

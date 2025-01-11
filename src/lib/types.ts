@@ -21,10 +21,13 @@ export interface ChangeInfo extends Record<string, any> {
    */
   stat?: Stats;
   path: string;
+  isDirectory?: boolean;
 }
 
 declare module '@eggjs/core' {
   interface EggCore {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     watcher: Watcher;
   }
 
