@@ -59,6 +59,13 @@ describe('test/development.test.ts', () => {
     count = parseInt(res.text);
     assert(count > lastCount, `count: ${count}, lastCount: ${lastCount}`);
 
+    await app.httpRequest()
+      .get('/app-hasDir')
+      .expect(200)
+      .expect({
+        hasDir: false,
+      });
+
     /*
     // TODO wait unsubscribe implementation of cluster-client
     await request(server)

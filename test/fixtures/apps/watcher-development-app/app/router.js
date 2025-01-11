@@ -5,10 +5,14 @@ const dir_path = path.join(__dirname, '../tmp');
 
 module.exports = function(app) {
   let fileChangeCount = 0;
+  let hasDir = false;
 
   function callback(info) {
     console.log('got change %j', info);
     fileChangeCount++;
+    if (info.isDirectory) {
+      hasDir = true;
+    }
   }
 
   app.get('/app-watch', async ctx => {
@@ -23,6 +27,12 @@ module.exports = function(app) {
 
   app.get('/app-msg', async ctx => {
     ctx.body = fileChangeCount;
+  });
+
+  app.get('/app-hasDir', async ctx => {
+    ctx.body = {
+      hasDir,
+    };
   });
 
   app.get('/agent-watch', async ctx => {
