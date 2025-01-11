@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.0.4](https://github.com/eggjs/watcher/compare/v4.0.3...v4.0.4) (2025-01-11)
+
+
+### Bug Fixes
+
+* add isDirectory property ([#18](https://github.com/eggjs/watcher/issues/18)) ([1aaa983](https://github.com/eggjs/watcher/commit/1aaa98388edbdb4a327bbf3bd18f6760e3bfd262))
+
 ## [4.0.3](https://github.com/eggjs/watcher/compare/v4.0.2...v4.0.3) (2025-01-04)
 
 
